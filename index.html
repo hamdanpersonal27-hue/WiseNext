@@ -3,9 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wisenext - Muhammad Waqas</title>
-     
+  <title>Wisenext - Services & Leadership</title>
+      
   <style>
+    /* CSS Variables for Bright Modern Theme */
+    :root {
+      --bg-color: #f8fafc;
+      --text-color: #0f172a;
+      --hero-text-color: #334155;
+      --nav-bg: rgba(255, 255, 255, 0.85);
+      --box-bg: rgba(255, 255, 255, 0.85);
+      --card-bg: #ffffff;
+      --card-hover-bg: #ffffff;
+      --card-border: rgba(226, 232, 240, 0.8);
+      --bg-overlay-filter: brightness(1.05) opacity(0.15);
+      --dot-bg: rgba(148, 163, 184, 0.5);
+      --accent-color: #0284c7;
+      --accent-gradient: linear-gradient(135deg, #0284c7, #0d9488);
+      --shadow-color: rgba(15, 23, 42, 0.08);
+    }
+
+    /* Dark Mode Switch */
+    body.dark-mode {
+      --bg-color: #0f172a;
+      --text-color: #f8fafc;
+      --hero-text-color: #cbd5e1;
+      --nav-bg: rgba(15, 23, 42, 0.85);
+      --box-bg: rgba(30, 41, 59, 0.85);
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --card-hover-bg: rgba(255, 255, 255, 0.08);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --bg-overlay-filter: brightness(0.6);
+      --dot-bg: rgba(255, 255, 255, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+
     /* Reset & Base Styles */
     * {
       box-sizing: border-box;
@@ -17,8 +49,9 @@
       height: 100%;
       overflow: hidden;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #ffffff;
-      background-color: #081012;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+      transition: background-color 0.4s ease, color 0.4s ease;
     }
 
     /* Fixed Animated Background Overlay */
@@ -32,8 +65,9 @@
       background-position: center center;
       background-repeat: no-repeat;
       background-size: cover;
-      filter: brightness(0.7);
+      filter: var(--bg-overlay-filter);
       z-index: -2;
+      transition: filter 0.4s ease;
     }
 
     /* Animated Canvas Particle Overlay */
@@ -47,12 +81,12 @@
       pointer-events: none;
     }
 
-    /* Glowing Glassmorphism Navbar */
+    /* Glassmorphism Navbar */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(10, 25, 20, 0.75);
+      background: var(--nav-bg);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       padding: 1.2rem 2.5rem;
@@ -61,58 +95,145 @@
       left: 0;
       width: 100%;
       z-index: 1000;
-      border-bottom: 2px solid transparent;
-      border-image: linear-gradient(90deg, #4CAF50, #00E676, #00B0FF, #4CAF50) 1;
-      animation: borderGlow 6s infinite linear;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 4px 20px var(--shadow-color);
+      transition: background 0.4s ease;
     }
 
-    @keyframes borderGlow {
-      0% { filter: hue-rotate(0deg); }
-      100% { filter: hue-rotate(360deg); }
+    /* Professional WiseNext Logo */
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+      flex-shrink: 0;
     }
 
-    .brand-title {
-      font-size: 2rem;
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0284c7, #0d9488);
+      box-shadow: 0 8px 22px rgba(2, 132, 199, 0.25);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .brand-logo::before {
+      content: "";
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 50%;
+      top: -35px;
+      right: -35px;
+    }
+
+    .brand-logo svg {
+      width: 31px;
+      height: 31px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-name {
+      font-size: 1.85rem;
       font-weight: 800;
-      background: linear-gradient(135deg, #00E676, #80D8FF);
+      letter-spacing: 0.5px;
+      line-height: 1;
+      background: var(--accent-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: 1.5px;
-      transition: transform 0.3s ease;
     }
 
-    .brand-title:hover {
-      transform: scale(1.05);
+    .brand-tagline {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.64rem;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      color: var(--hero-text-color);
+      text-transform: uppercase;
+    }
+
+    .brand:hover .brand-logo {
+      transform: translateY(-2px) rotate(-2deg);
+      box-shadow: 0 12px 28px rgba(2, 132, 199, 0.34);
+    }
+
+    .brand:hover .brand-name {
+      transform: translateX(2px);
+    }
+
+    @media (max-width: 768px) {
+      .brand-name {
+        font-size: 1.55rem;
+      }
+      .brand-logo {
+        width: 42px;
+        height: 42px;
+      }
+      .brand-tagline {
+        font-size: 0.56rem;
+      }
     }
 
     .tab-buttons {
       display: flex;
       list-style: none;
       gap: 1rem;
+      align-items: center;
     }
 
     .tab-btn {
       background: transparent;
       border: none;
-      color: #ffffff;
+      color: var(--hero-text-color);
       font-size: 1.05rem;
       padding: 0.6rem 1.4rem;
       cursor: pointer;
       border-radius: 20px;
       text-decoration: none;
       position: relative;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      font-weight: 500;
+      transition: all 0.3s ease;
     }
 
     .tab-btn:hover, .tab-btn.active {
-      color: #00E676;
-      background: rgba(0, 230, 118, 0.15);
-      box-shadow: 0 0 20px rgba(0, 230, 118, 0.4);
-      font-weight: bold;
-      transform: translateY(-2px);
+      color: #0284c7;
+      background: rgba(2, 132, 199, 0.1);
+      font-weight: 600;
+      transform: translateY(-1px);
     }
 
-    /* Floating Page Indicator Dots Side Menu */
+    /* Theme Toggle Button */
+    .theme-toggle-btn {
+      background: rgba(2, 132, 199, 0.1);
+      border: 1px solid rgba(2, 132, 199, 0.3);
+      color: var(--text-color);
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      background: #0284c7;
+      color: #ffffff;
+      transform: scale(1.03);
+    }
+
+    /* Side Menu Indicators */
     .scroll-indicator {
       position: fixed;
       right: 2rem;
@@ -125,19 +246,16 @@
     }
 
     .dot-link {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.25);
-      border: 2px solid transparent;
-      transition: all 0.4s ease;
+      background: var(--dot-bg);
+      transition: all 0.3s ease;
       text-decoration: none;
-      position: relative;
     }
 
     .dot-link:hover, .dot-link.active {
-      background: #00E676;
-      box-shadow: 0 0 15px #00E676;
+      background: #0284c7;
       transform: scale(1.4);
     }
 
@@ -162,164 +280,220 @@
       perspective: 1000px;
     }
 
-    /* Content Box with Scroll Reveal Animation */
+    /* Content Box */
     .content-box {
-      max-width: 1100px;
+      max-width: 1200px;
       width: 100%;
-      background: rgba(10, 20, 15, 0.85);
+      background: var(--box-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      padding: 3.5rem;
-      border-radius: 28px;
-      border: 1px solid rgba(0, 230, 118, 0.25);
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+      padding: 3rem;
+      border-radius: 24px;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 20px 40px var(--shadow-color);
       opacity: 0;
-      transform: translateY(60px) scale(0.95);
-      transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1), background 0.4s ease;
     }
 
     .page-section.visible .content-box {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
     }
 
     h1 {
-      font-size: 3.2rem;
-      margin-bottom: 1.5rem;
+      font-size: 2.8rem;
+      margin-bottom: 1.2rem;
       line-height: 1.2;
-      background: linear-gradient(90deg, #80D8FF, #00E676, #80D8FF);
-      background-size: 200% auto;
+      background: var(--accent-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: shineText 4s linear infinite;
       text-transform: capitalize;
-    }
-
-    @keyframes shineText {
-      to { background-position: 200% center; }
+      font-weight: 800;
     }
 
     .hero-text {
-      font-size: 1.35rem;
+      font-size: 1.2rem;
       line-height: 1.8;
-      color: #e0e0e0;
+      color: var(--hero-text-color);
       max-width: 900px;
     }
 
-    /* Liquid Gradient Separator Line */
+    /* Gradient Line Separator */
     .green-line {
       border: 0;
-      height: 4px;
-      background: linear-gradient(90deg, transparent, #00E676, #00B0FF, #00E676, transparent);
-      background-size: 200% 100%;
-      margin: 2rem 0;
-      box-shadow: 0 0 15px #00E676;
-      animation: moveGradient 3s linear infinite;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #0284c7, #0d9488, transparent);
+      margin: 1.5rem 0;
+      border-radius: 2px;
     }
 
-    @keyframes moveGradient {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 200% 50%; }
+    /* Dual Profile Grid Layout */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
     }
 
-    /* Interactive Grid Cards with 3D Mouse Tilt Effect */
+    .profile-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 20px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 10px 25px var(--shadow-color);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .profile-card:hover {
+      transform: translateY(-5px);
+      border-color: #0284c7;
+    }
+
+    .profile-img-wrapper {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid rgba(2, 132, 199, 0.3);
+      box-shadow: 0 8px 20px var(--shadow-color);
+      margin-bottom: 1.2rem;
+    }
+
+    .profile-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .profile-card:hover .profile-img-wrapper img {
+      transform: scale(1.08);
+    }
+
+    .profile-details h2 {
+      font-size: 1.8rem;
+      color: #0284c7;
+      margin-bottom: 0.3rem;
+    }
+
+    .profile-details h4 {
+      font-size: 1.05rem;
+      color: #0d9488;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .profile-details p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--hero-text-color);
+    }
+
+    /* Interactive Grid Cards */
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.8rem;
-      margin: 1.5rem 0;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.2rem;
+      margin: 1rem 0;
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 20px;
-      padding: 2.2rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 1.2rem;
+      box-shadow: 0 10px 25px var(--shadow-color);
+      border: 1px solid var(--card-border);
       position: relative;
       overflow: hidden;
-      transform-style: preserve-3d;
-      transition: transform 0.1s ease-out, border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
-      transition: left 0.6s ease;
-    }
-
-    .card:hover::before {
-      left: 100%;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .card:hover {
-      border-color: #00E676;
-      box-shadow: 0 20px 40px rgba(0, 230, 118, 0.3);
-      background: rgba(255, 255, 255, 0.07);
+      border-color: #0284c7;
+      box-shadow: 0 15px 35px rgba(2, 132, 199, 0.15);
+      transform: translateY(-5px);
+    }
+
+    /* Fixed image wrapper for full image view without cropping */
+    .card-image-wrapper {
+      width: 100%;
+      height: 160px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 0.8rem;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--card-bg);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover .card-img {
+      transform: scale(1.05);
     }
 
     .card h3 {
-      color: #80D8FF;
-      font-size: 1.7rem;
-      margin-bottom: 0.8rem;
-      transition: color 0.3s ease;
-    }
-
-    .card:hover h3 {
-      color: #00E676;
+      color: #0284c7;
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
     }
 
     .card p, .card a {
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: #e0e0e0;
+      font-size: 0.88rem;
+      line-height: 1.4;
+      color: var(--hero-text-color);
       text-decoration: none;
       word-break: break-all;
     }
 
     .card a {
-      color: #80D8FF;
+      color: #0284c7;
+      font-weight: 600;
       display: inline-block;
       transition: all 0.3s ease;
     }
 
     .card a:hover {
-      color: #00E676;
-      transform: translateX(6px);
-      text-shadow: 0 0 10px rgba(0, 230, 118, 0.6);
+      color: #0d9488;
+      transform: translateX(4px);
     }
 
-    /* Animated Progress Bar & Dynamic Percentage Numbers */
+    /* Animated Progress Bar */
     .metric-header {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 0.6rem;
-      font-size: 1.05rem;
-      color: #ffffff;
+      margin-bottom: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--text-color);
       font-weight: 600;
-      margin-top: 1.2rem;
+      margin-top: 0.8rem;
     }
 
     .progress-bar-bg {
       width: 100%;
-      height: 12px;
-      background-color: rgba(255, 255, 255, 0.1);
+      height: 7px;
+      background-color: #e2e8f0;
       border-radius: 8px;
       overflow: hidden;
-      position: relative;
     }
 
     .progress-bar-fill {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, #00E676, #00B0FF);
+      background: linear-gradient(90deg, #0284c7, #0d9488);
       border-radius: 8px;
-      box-shadow: 0 0 12px #00E676;
       transition: width 1.8s cubic-bezier(0.1, 0.8, 0.3, 1);
     }
 
@@ -343,6 +517,10 @@
       .content-box {
         padding: 2rem 1.2rem;
       }
+      .profile-img-wrapper {
+        width: 150px;
+        height: 150px;
+      }
       h1 { font-size: 2.2rem; }
     }
   </style>
@@ -354,12 +532,29 @@
 
   <!-- Navigation Bar -->
   <nav class="navbar">
-    <div class="brand-title">Wisenext</div>
+    <a href="#home" class="brand" aria-label="WiseNext Home">
+      <span class="brand-logo" aria-hidden="true">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 29V20.5L12.5 15V29" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16.5 29V13L22 7.5V29" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M26 29V18L31.5 12.5V29" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6 32H34" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <path d="M25.5 8.5L31.5 5L34 7.5" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span>
+        <span class="brand-name">WiseNext</span>
+        <span class="brand-tagline">Financial Intelligence</span>
+      </span>
+    </a>
     <div class="tab-buttons">
       <a href="#home" class="tab-btn active">Home</a>
       <a href="#about" class="tab-btn">About</a>
       <a href="#services" class="tab-btn">Services</a>
       <a href="#contact" class="tab-btn">Contact</a>
+      <button class="theme-toggle-btn" id="themeBtn" onclick="toggleTheme()">
+        <span id="themeIcon">🌙</span> <span id="themeText">Dark</span>
+      </button>
     </div>
   </nav>
 
@@ -368,26 +563,34 @@
     <a href="#home" class="dot-link active" title="Home"></a>
     <a href="#about" class="dot-link" title="About"></a>
     <a href="#services" class="dot-link" title="Services"></a>
+    <a href="#profile" class="dot-link" title="Profile"></a>
     <a href="#contact" class="dot-link" title="Contact"></a>
   </div>
 
-  <!-- Page-to-Page Scroll Container -->
+  <!-- Page Scroll Container -->
   <div class="snap-container" id="snapContainer">
     
     <!-- Page 1: Home -->
     <section id="home" class="page-section visible">
       <div class="content-box">
         <h1>Best Website To Get Professional Accounting & Bookkeeping Services</h1>
-    
       </div>
     </section>
 
     <!-- Page 2: About -->
     <section id="about" class="page-section">
-     
       <div class="content-box">
-        <h1>Hi everyone</h1>
-        <p>you will get your professional bookkeeping and accounting services very professional</p>
+        <h1>About WiseNext</h1>
+
+        <p>
+        At WiseNext, we help businesses make smarter financial decisions, build strong foundations,
+        and move confidently toward sustainable growth.
+        </p>
+
+        <p>
+        We provide professional Accounting, Taxation, Bookkeeping, Financial Modeling,
+        Business Planning, QuickBooks/Xero, Business Analysis, and Business Valuation services.
+        </p>
       </div>
     </section>
 
@@ -399,11 +602,14 @@
         <hr class="green-line">
 
         <div class="cards-grid">
+          <!-- Accounting Card -->
           <div class="card">
+            <div class="card-image-wrapper">
+              <img src="Screenshot 2026-09-07 224353.png" alt="Accounting Services" class="card-img">
+            </div>
             <h3>Accounting</h3>
-            <p>Comprehensive financial reporting, oversight, and tax-ready balancing.</p>
+
             <div class="metric-header">
-              <span>Accounting Proficiency</span>
               <span class="counter-num" data-target="95">0%</span>
             </div>
             <div class="progress-bar-bg">
@@ -411,15 +617,107 @@
             </div>
           </div>
 
+          <!-- Bookkeeping Card -->
           <div class="card">
+            <div class="card-image-wrapper">
+              <img src="Screenshot 2026-09-07 223152.png" alt="Bookkeeping Services" class="card-img">
+            </div>
             <h3>Bookkeeping</h3>
-            <p>Daily ledger management, bank reconciliations, and audit-ready tracking.</p>
+            
             <div class="metric-header">
-              <span>Bookkeeping Proficiency</span>
               <span class="counter-num" data-target="95">0%</span>
             </div>
             <div class="progress-bar-bg">
               <div class="progress-bar-fill" data-progress="95%"></div>
+            </div>
+          </div>
+
+          <!-- Taxation Card -->
+          <div class="card">
+            <div class="card-image-wrapper">
+              <img src="Screenshot 2026-09-08 072504.png" alt="Taxation Services" class="card-img">
+            </div>
+            <h3>Taxation</h3>
+            <div class="metric-header">
+              <span class="counter-num" data-target="70">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" data-progress="70%"></div>
+            </div>
+          </div>
+
+          <!-- Financial Modelling Card -->
+          <div class="card">
+            <div class="card-image-wrapper">
+              <img src="Screenshot 2026-09-08 074900.png" alt="Financial Modelling Services" class="card-img">
+            </div>
+            <h3>Financial Modelling</h3>
+       
+            <div class="metric-header">
+              <span class="counter-num" data-target="85">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" data-progress="85%"></div>
+            </div>
+          </div>
+
+          <!-- Business Planning Card -->
+          <div class="card">
+            <div class="card-image-wrapper">
+              <img src="Screenshot 2026-09-08 224640.png" alt="Business Planning Services" class="card-img">
+            </div>
+            <h3>Business Planning</h3>
+           
+            <div class="metric-header">
+              <span class="counter-num" data-target="80">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" data-progress="80%"></div>
+            </div>
+          </div>
+
+          <!-- Quickbooks/Xero Card -->
+          <div class="card">
+            <div class="card-image-wrapper">
+              <img src="Screenshot 2026-09-08 230323.png" alt="Quickbooks/Xero" class="card-img">
+            </div>
+            <h3>Quickbooks/Xero</h3>
+          
+            <div class="metric-header">
+              <span class="counter-num" data-target="95">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" data-progress="95%"></div>
+            </div>
+          </div>
+
+          <!-- Business Analytics Card -->
+          <div class="card">
+            <div class="card-image-wrapper">
+              <img src="Screenshot 2026-09-08 231142.png" alt="Business Analytics" class="card-img">
+            </div>
+            <h3>Business Analytics</h3>
+        
+            <div class="metric-header">
+              <span class="counter-num" data-target="80">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" data-progress="80%"></div>
+            </div>
+          </div>
+
+          <!-- Business Valuation Card -->
+          <div class="card">
+            <div class="card-image-wrapper">
+              <img src="Screenshot 2026-09-08 232114.png" alt="Business Valuation" class="card-img">
+            </div>
+            <h3>Business Valuation</h3>
+            
+            <div class="metric-header">
+              <span class="counter-num" data-target="89">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" data-progress="89%"></div>
             </div>
           </div>
         </div>
@@ -428,25 +726,59 @@
       </div>
     </section>
 
-    <!-- Page 4: Contact -->
+    <!-- Page 4: Leadership Section -->
+    <section id="profile" class="page-section">
+      <div class="content-box">
+        <h1>Executive Leadership</h1>
+        <hr class="green-line">
+        
+        <div class="team-grid">
+          <!-- Profile 1 -->
+          <div class="profile-card">
+            <div class="profile-img-wrapper">
+              <img src="Screenshot 2026-09-07 230758.png" alt="Muhammad Nawazish">
+            </div>
+            <div class="profile-details">
+              <h2>Muhammad Nawazish</h2>
+              <p>Accountant<br>5 years Experience, providing expert financial services at WiseNext Consultants.</p>
+            </div>
+          </div>
+
+          <!-- Profile 2 -->
+          <div class="profile-card">
+            <div class="profile-img-wrapper">
+              <img src="Screenshot 2026-09-08 013500.png" alt="Executive Leadership">
+            </div>
+            <div class="profile-details">
+              <h2>Muhammad Waqas</h2>
+              <p>CERTIFIED PUBLIC ACCOUNTANT<br>15 years Experience, providing expert financial services at WiseNext Consultants.</p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="green-line">
+      </div>
+    </section>
+
+    <!-- Page 5: Contact -->
     <section id="contact" class="page-section">
       <div class="content-box">
-        <h1>Get In Touch</h1>
+        <h1>Contact us</h1>
         
         <div class="cards-grid">
           <div class="card">
             <h3>Phone Number</h3>
-            <p>03365462149</p>
+            <p><a href="tel:03365462149">03365462149 &#10142;</a></p>
           </div>
 
           <div class="card">
             <h3>WhatsApp</h3>
-            <a href="https://wa.me/qr/QKDFVKHN72EZH1">https://wa.me/qr/QKDFVKHN72EZH1</a>
+            <p><a href="https://wa.me/qr/QKDFVKHN72EZH1" target="_blank">https://wa.me/qr/QKDFVKHN72EZH1</a></p>
           </div>
 
           <div class="card">
             <h3>Email</h3>
-            <p>waqas60988@gmail.com</p>
+            <p><a href="mailto:waqas60988@gmail.com">waqas60988@gmail.com &#10142;</a></p>
           </div>
         </div>
       </div>
@@ -455,6 +787,23 @@
   </div>
 
   <script>
+    /* Theme Toggle Logic */
+    function toggleTheme() {
+      const body = document.body;
+      const themeIcon = document.getElementById('themeIcon');
+      const themeText = document.getElementById('themeText');
+
+      body.classList.toggle('dark-mode');
+
+      if (body.classList.contains('dark-mode')) {
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'Light';
+      } else {
+        themeIcon.textContent = '🌙';
+        themeText.textContent = 'Dark';
+      }
+    }
+
     /* Dynamic Particle Canvas */
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
@@ -474,7 +823,7 @@
         this.size = Math.random() * 3 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = Math.random() > 0.5 ? 'rgba(0, 230, 118, 0.4)' : 'rgba(128, 216, 255, 0.4)';
+        this.color = Math.random() > 0.5 ? 'rgba(2, 132, 199, 0.25)' : 'rgba(13, 148, 136, 0.25)';
       }
       update() {
         this.x += this.speedX;
@@ -505,21 +854,7 @@
     }
     animateParticles();
 
-    /* 3D Mouse Tilt Effect for Cards */
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        card.style.transform = `rotateY(${x / 15}deg) rotateX(${-y / 15}deg) translateY(-8px)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = `rotateY(0deg) rotateX(0deg) translateY(0)`;
-      });
-    });
-
-    /* Scroll Observer: Activates Content Entrance & Animated Counter Numbers */
+    /* Scroll Observer */
     const snapContainer = document.getElementById('snapContainer');
     const sections = document.querySelectorAll('.page-section');
     const navLinks = document.querySelectorAll('.tab-btn');
