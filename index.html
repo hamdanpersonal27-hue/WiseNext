@@ -147,7 +147,6 @@
       text-transform: uppercase;
     }
 
-    /* Responsive Flex Layout for Nav Buttons */
     .nav-right {
       display: flex;
       align-items: center;
@@ -186,7 +185,6 @@
       font-weight: 600;
     }
 
-    /* Theme Toggle Button */
     .theme-toggle-btn {
       background: rgba(2, 132, 199, 0.1);
       border: 1px solid rgba(2, 132, 199, 0.3);
@@ -209,7 +207,6 @@
       color: #ffffff;
     }
 
-    /* Side Menu Dot Indicators */
     .scroll-indicator {
       position: fixed;
       right: 1rem;
@@ -235,7 +232,6 @@
       transform: scale(1.4);
     }
 
-    /* Container & Section Layouts */
     .snap-container {
       width: 100%;
       min-height: 100vh;
@@ -372,6 +368,7 @@
       color: var(--hero-text-color);
     }
 
+    /* Enhanced Interactive Real Calendar Styles */
     .calendar-container {
       background: var(--card-bg);
       border-radius: 20px;
@@ -385,58 +382,122 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
     .calendar-header h3 {
       color: #0284c7;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .calendar-nav-group {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
     }
 
     .calendar-btn {
       background: var(--accent-gradient);
       color: white;
       border: none;
-      padding: 0.4rem 0.8rem;
-      border-radius: 8px;
+      padding: 0.45rem 0.9rem;
+      border-radius: 10px;
       cursor: pointer;
       font-weight: 600;
+      font-size: 0.85rem;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .calendar-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
     }
 
     .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 0.4rem;
+      gap: 0.5rem;
       text-align: center;
     }
 
     .calendar-day-head {
       font-weight: 700;
       color: #0d9488;
-      padding: 0.4rem 0;
+      padding: 0.5rem 0;
       font-size: 0.85rem;
+      text-transform: uppercase;
     }
 
     .calendar-day {
       padding: 0.6rem;
       background: rgba(2, 132, 199, 0.05);
-      border-radius: 8px;
-      font-size: 0.85rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
       color: var(--hero-text-color);
-      min-height: 42px;
+      min-height: 52px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .calendar-day:hover:not(.empty) {
+      border-color: #0284c7;
+      background: rgba(2, 132, 199, 0.15);
     }
 
     .calendar-day.empty {
       background: transparent;
+      cursor: default;
     }
 
     .calendar-day.today {
       background: #0284c7;
       color: #ffffff;
       font-weight: bold;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+    }
+
+    .calendar-day.selected {
+      border: 2px solid #0d9488;
+      background: rgba(13, 148, 136, 0.2);
+    }
+
+    .event-indicator {
+      width: 6px;
+      height: 6px;
+      background-color: #0d9488;
+      border-radius: 50%;
+      margin-top: 4px;
+    }
+
+    .calendar-day.today .event-indicator {
+      background-color: #ffffff;
+    }
+
+    .calendar-details-panel {
+      margin-top: 1.2rem;
+      padding: 1rem;
+      background: rgba(2, 132, 199, 0.08);
+      border-radius: 12px;
+      border-left: 4px solid #0284c7;
+    }
+
+    .calendar-details-panel h4 {
+      font-size: 1rem;
+      color: #0284c7;
+      margin-bottom: 0.3rem;
+    }
+
+    .calendar-details-panel p {
+      font-size: 0.88rem;
+      color: var(--hero-text-color);
     }
 
     .cards-grid {
@@ -518,7 +579,6 @@
       transition: width 1.8s cubic-bezier(0.1, 0.8, 0.3, 1);
     }
 
-    /* iPad / Tablet Responsiveness Adjustments */
     @media (max-width: 1024px) {
       .navbar {
         padding: 0.5rem 1rem;
@@ -532,7 +592,6 @@
       }
     }
 
-    /* Mobile Device Responsiveness */
     @media (max-width: 768px) {
       .navbar {
         flex-direction: column;
@@ -580,6 +639,16 @@
         flex-direction: column;
         text-align: center;
       }
+
+      .calendar-grid {
+        gap: 0.2rem;
+      }
+
+      .calendar-day {
+        min-height: 40px;
+        font-size: 0.75rem;
+        padding: 0.3rem;
+      }
     }
 
     body {
@@ -619,7 +688,7 @@
       <div class="tab-buttons">
         <a href="#home" class="tab-btn nav-link active">Home</a>
         <a href="#about" class="tab-btn nav-link">About</a>
-        <a href="#waqas-calendar" class="tab-btn nav-link">Waqas Calendar</a>
+        <a href="#-calendar" class="tab-btn nav-link">Calendar</a>
         <a href="#services" class="tab-btn nav-link">Services</a>
         <a href="#contact" class="tab-btn nav-link">Contact</a>
       </div>
@@ -633,7 +702,7 @@
   <div class="scroll-indicator">
     <a href="#home" class="dot-link nav-link active" title="Home"></a>
     <a href="#about" class="dot-link nav-link" title="About"></a>
-    <a href="#waqas-calendar" class="dot-link nav-link" title="Waqas Calendar"></a>
+    <a href="calendar" class="dot-link nav-link" title="Calendar"></a>
     <a href="#services" class="dot-link nav-link" title="Services"></a>
     <a href="#contact" class="dot-link nav-link" title="Contact"></a>
   </div>
@@ -646,7 +715,8 @@
       <div class="content-box hero-flex-container">
         <div class="hero-text-content">
           <h1>Best Website To Get Professional Accounting & Bookkeeping Services</h1>
-  
+
+          </p>
         </div>
         <div class="hero-image-wrapper">
           <img src="Screenshot 2026-09-11 100034.png" alt="Accounting Services" class="hero-img">
@@ -699,9 +769,27 @@
     <!-- Page 3: Calendar of Muhammad Waqas -->
     <section id="waqas-calendar" class="page-section">
       <div class="content-box">
-    
-          <h1>Calendar of WiseNext </h1>
-          <a href="https://calendar.google.com/calendar/u/0/r">https://calendar.google.com/calendar/u/0/r</a>
+  
+        <hr class="green-line">
+
+        <div class="calendar-container">
+          <div class="calendar-header">
+            <h3 id="monthYearDisplay">September 2026</h3>
+            <div class="calendar-nav-group">
+              <button class="calendar-btn" onclick="changeMonth(-1)">&lt; Prev Month</button>
+              <button class="calendar-btn" onclick="resetToToday()">Today</button>
+              <button class="calendar-btn" onclick="changeMonth(1)">Next Month &gt;</button>
+            </div>
+          </div>
+          <div class="calendar-grid" id="calendarGrid">
+            <!-- Real dynamic days rendered here -->
+          </div>
+          
+          <div class="calendar-details-panel" id="calendarDetails">
+            <h4 id="selectedDateTitle">Select a date</h4>
+
+          </div>
+        </div>
       </div>
     </section>
 
@@ -795,7 +883,7 @@
         <div class="cards-grid">
           <div class="card">
             <h3>Phone Number</h3>
-            <p><a href="tel:03365462149">03365462149 &#10142;</a></p>
+            <a href="http://03365462149" target="_blank" rel="noopener noreferrer">03365462149</a>
           </div>
           <div class="card">
             <h3>WhatsApp</h3>
@@ -876,8 +964,9 @@
     }
     animateParticles();
 
-    /* Calendar Logic */
-    let currentDate = new Date(2026, 8, 12);
+    /* Real Interactive Calendar Engine */
+    let currentDate = new Date();
+    let selectedDayElement = null;
 
     function renderCalendar() {
       const monthYearDisplay = document.getElementById('monthYearDisplay');
@@ -886,7 +975,10 @@
       const year = currentDate.getFullYear();
       const month = currentDate.getMonth();
       
-      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      const monthNames = [
+        "January", "February", "March", "April", "May", "June", 
+        "July", "August", "September", "October", "November", "December"
+      ];
       monthYearDisplay.textContent = `${monthNames[month]} ${year}`;
 
       calendarGrid.innerHTML = '';
@@ -908,15 +1000,47 @@
         calendarGrid.appendChild(emptyDiv);
       }
 
-      const today = new Date();
+      const realToday = new Date();
       for (let day = 1; day <= lastDay; day++) {
         const dayDiv = document.createElement('div');
         dayDiv.className = 'calendar-day';
-        dayDiv.textContent = day;
 
-        if (day === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+        const dayNumSpan = document.createElement('span');
+        dayNumSpan.textContent = day;
+        dayDiv.appendChild(dayNumSpan);
+
+        if (day % 3 === 0 || day % 7 === 0) {
+          const dot = document.createElement('div');
+          dot.className = 'event-indicator';
+          dayDiv.appendChild(dot);
+        }
+
+        if (
+          day === realToday.getDate() && 
+          month === realToday.getMonth() && 
+          year === realToday.getFullYear()
+        ) {
           dayDiv.classList.add('today');
         }
+
+        dayDiv.addEventListener('click', () => {
+          if (selectedDayElement) {
+            selectedDayElement.classList.remove('selected');
+          }
+          dayDiv.classList.add('selected');
+          selectedDayElement = dayDiv;
+
+          const title = document.getElementById('selectedDateTitle');
+          const info = document.getElementById('selectedDateInfo');
+          const dayOfWeek = new Date(year, month, day).toLocaleDateString('en-US', { weekday: 'long' });
+          
+          title.textContent = `${dayOfWeek}, ${monthNames[month]} ${day}, ${year}`;
+          if (dayOfWeek === 'Sunday') {
+            info.textContent = 'Available Hours 12:00 to 12:00.';
+          } else {
+            info.textContent = `Available Hours: 12:00 to 12:00.`;
+          }
+        });
 
         calendarGrid.appendChild(dayDiv);
       }
@@ -924,6 +1048,11 @@
 
     function changeMonth(direction) {
       currentDate.setMonth(currentDate.getMonth() + direction);
+      renderCalendar();
+    }
+
+    function resetToToday() {
+      currentDate = new Date();
       renderCalendar();
     }
 
